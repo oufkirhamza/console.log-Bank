@@ -83,3 +83,14 @@ while (true) {
     }
 }
 console.log(promptEmail);
+
+let promptAge = prompt(`how old are you`)
+while (true) {
+    if (!isNaN(promptAge) && promptAge.length < 3 && promptAge.length > 0) {
+        break;
+    } else {
+        promptAge = prompt(`how old are you`)
+    }
+}
+let trimAge = +promptAge.trim()
+console.log( trimAge);
