@@ -53,6 +53,21 @@ class Person {
 let promptEmail = prompt(`enter your email`);
 let delSpaceEmail = promptEmail.trim();
 let lowerEmail = delSpaceEmail.toLowerCase()
+let arrLowerEmail = lowerEmail.split("")
 console.log(lowerEmail);
-
+let special = `\`!#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~`;
+let speCharac = special.split("")
+while (true) {
+    let check = true;
+    for (let index = 0; index < speCharac.length; index++) {
+        let element = speCharac[index];
+        if (lowerEmail.includes(element) || lowerEmail.includes(" ") || !lowerEmail.includes("@") || lowerEmail.length<10) {
+            check = false;
+            alert(`your email must contain @ and not include a special character except @ and numbers and more than 10 characters`)
+        } else {
+            check = true;
+            break
+        }
+    }
+}
 

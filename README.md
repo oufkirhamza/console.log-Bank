@@ -30,7 +30,7 @@
             - Do not save the Email if it has spaces in the middle.
             - Do not save the Email if it has fewer than 10 characters (excluding spaces).
             - Do not save the Email if it does not contain exactly one "@" symbol.
-            - Ensure the email is unique.
+            <!--! - Ensure the email is unique. -->
 
             # Age:
             - Check for leading, trailing, or middle spaces.
