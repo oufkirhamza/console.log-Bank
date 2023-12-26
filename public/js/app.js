@@ -93,4 +93,28 @@ while (true) {
     }
 }
 let trimAge = +promptAge.trim()
-console.log( trimAge);
+console.log(trimAge);
+
+let promptPassword = prompt(`enter your password`)
+let spacesPass = promptPassword.trim();
+while (true) {
+    let special = `\`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`;
+    let speCharac = special.split("")
+    let check = false;
+    for (let index = 0; index < speCharac.length; index++) {
+        let element = speCharac[index];
+        if (spacesPass.includes(element)) {
+            check = true;
+            break
+        } else {
+            check = false
+        }
+    }
+    if (check == true && spacesPass.length > 6 && !spacesPass.includes(" ")) {
+        break;
+    } else {
+        promptPassword = prompt(`enter your password`)
+        spacesPass = promptPassword.trim();
+    }
+}
+console.log(promptPassword);
