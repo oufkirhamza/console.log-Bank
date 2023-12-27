@@ -1,6 +1,6 @@
 let bank = {
-    name : `jsBank`,
-    data : []
+    name: `jsBank`,
+    data: []
 }
 console.log(bank);
 class Person {
@@ -12,8 +12,33 @@ class Person {
         this.money = money
     }
 }
-let admin = new Person (`admin`,43,`admin@gmail.com`,`@dmin123`,1000)
+let admin = new Person(`admin`, 43, `admin@gmail.com`, `@dmin123`, 1000)
 bank.data.push(admin)
+
+function checkPassWord(params) {
+    while (true) {
+        let special = `\`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`;
+        let speCharac = special.split("")
+        let check = false;
+        for (let index = 0; index < speCharac.length; index++) {
+            let element = speCharac[index];
+            if (params.includes(element)) {
+                check = true;
+                break
+            } else {
+                check = false
+            }
+        }
+        if (check == true && params.length > 6 && !params.includes(" ")) {
+            break;
+        } else {
+            alert(`your password must have at least one special character and more than 6 charachters`)
+            promptPassword = prompt(`enter your password`)
+            params = promptPassword.trim();
+        }
+    }
+}
+
 let ask = prompt(`welcome to js bank ( to Sing up click : a // to Log in click : b // to reset your password click : c )`)
 let lowerAsk = ask.toLowerCase()
 while (true) {
@@ -107,32 +132,14 @@ while (true) {
 
             let promptPassword = prompt(`enter your password`)
             let spacesPass = promptPassword.trim();
-            while (true) {
-                let special = `\`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`;
-                let speCharac = special.split("")
-                let check = false;
-                for (let index = 0; index < speCharac.length; index++) {
-                    let element = speCharac[index];
-                    if (spacesPass.includes(element)) {
-                        check = true;
-                        break
-                    } else {
-                        check = false
-                    }
-                }
-                if (check == true && spacesPass.length > 6 && !spacesPass.includes(" ")) {
-                    break;
-                } else {
-                    alert(`your password must have at least one special character and more than 6 charachters`)
-                    promptPassword = prompt(`enter your password`)
-                    spacesPass = promptPassword.trim();
-                }
-            }
+
+            checkPassWord(spacesPass);
+
             console.log(promptPassword);
             let confirmPass = prompt(`confirme your password`)
             if (confirmPass == promptPassword) {
                 console.log(`welcome ${clientName}`);
-                let client1 = new Person (clientName, trimAge, promptEmail, promptPassword,1000);
+                let client1 = new Person(clientName, trimAge, promptEmail, promptPassword, 1000);
                 bank.data.push(client1);
                 break;
             } else {
@@ -142,7 +149,38 @@ while (true) {
         }
         break;
     } else if (lowerAsk == `b`) {
-        console.log(`ronaldo`);
+        // while (true) {
+        //     let promptEmail = prompt(`enter you email`);
+        //     bank.data.forEach(element => {
+        //         if (element.email == promptEmail) {
+        //             let promptPassword = prompt(`enter your password`)
+        //             if (element.password == promptPassword) {
+        //                 console.log(`welcome ${element.name}`);
+
+        //             }
+        //         }else{
+        //             promptEmail = prompt(`enter you email`);
+        //         }
+        //     });
+        // }
+        // break;
+    } else if (lowerAsk == `c`) {
+        let promptEmail = prompt(`enter you email`);
+        for (let index = 0; index < bank.data.length; index++) {
+            let element = bank.data[index]
+            if (element.email == promptEmail) {
+                let promptPassword = prompt(`enter your password`)
+                let spacesPass = promptPassword.trim();
+                checkPassWord(spacesPass);
+                element.password = spacesPass
+                break;
+            } else {
+                alert(`this email doesn't exist`);
+                ask = prompt(`welcome to js bank ( to Sing up click : a // to Log in click : b // to reset your password click : c )`)
+                lowerAsk = ask.toLowerCase() 
+                continue       
+            }
+        }
         break;
     } else {
         ask = prompt(`welcome to js bank ( to Sing up click : a // to Log in click : b // to reset your password click : c )`)
