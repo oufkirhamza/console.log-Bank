@@ -12,13 +12,19 @@ class Person {
         this.money = money
     }
     withDraw() {
-        let askMoney = prompt(`how much money you want`)
+        let askMoney = parseInt(prompt(`how much money you want`))
         if (askMoney <= this.money) {
-            // for (let index = 0; index < bank.data.length; index++) {
-            // let element = bank.data[index];
             this.money -= askMoney
         } else {
             console.log(`you dont have the full amounth`);
+        }
+    }
+    depositMoney() {
+        let askMoney = parseInt( prompt(`how much you want to deposite`))
+        if (askMoney <= 1000) {
+            this.money += askMoney
+        } else {
+            console.log(`the max is 1000 dh`);
         }
     }
 }
@@ -160,7 +166,7 @@ while (true) {
         break;
     } else if (lowerAsk == `b`) {
         let i = 0
-        while (i<3) {
+        while (i < 3) {
             let promptEmail = prompt(`enter your email`);
             for (let index = 0; index < bank.data.length; index++) {
                 let element = bank.data[index]
@@ -174,7 +180,11 @@ while (true) {
                             element.withDraw()
                             console.log(`your new money is ${element.money}`);
                             break;
-                        }break
+                        } else if (askUser == `d`) {
+                            element.depositMoney()
+                            console.log(bank);
+                            break;
+                        }
                     } else {
                         console.log(`you password is not correct`);
                     }
