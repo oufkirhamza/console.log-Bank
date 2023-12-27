@@ -11,6 +11,16 @@ class Person {
         this.password = password;
         this.money = money
     }
+    withDraw() {
+        let askMoney = prompt(`how much money you want`)
+        if (askMoney <= this.money) {
+            // for (let index = 0; index < bank.data.length; index++) {
+            // let element = bank.data[index];
+            this.money -= askMoney
+        } else {
+            console.log(`you dont have the full amounth`);
+        }
+    }
 }
 let admin = new Person(`admin`, 43, `admin@gmail.com`, `@dmin123`, 1000)
 bank.data.push(admin)
@@ -149,21 +159,31 @@ while (true) {
         }
         break;
     } else if (lowerAsk == `b`) {
-        // while (true) {
-        //     let promptEmail = prompt(`enter you email`);
-        //     bank.data.forEach(element => {
-        //         if (element.email == promptEmail) {
-        //             let promptPassword = prompt(`enter your password`)
-        //             if (element.password == promptPassword) {
-        //                 console.log(`welcome ${element.name}`);
-
-        //             }
-        //         }else{
-        //             promptEmail = prompt(`enter you email`);
-        //         }
-        //     });
-        // }
-        // break;
+        let i = 0
+        while (i<3) {
+            let promptEmail = prompt(`enter your email`);
+            for (let index = 0; index < bank.data.length; index++) {
+                let element = bank.data[index]
+                console.log(element);
+                if (element.email == promptEmail) {
+                    let promptPassword = prompt(`enter your password`)
+                    if (element.password == promptPassword) {
+                        console.log(`welcome mr ${element.name} you have ${element.money} dh`);
+                        let askUser = prompt(`you want to withdraw money click : w // you want to deposit money : d `);
+                        if (askUser == `w`) {
+                            element.withDraw()
+                            console.log(`your new money is ${element.money}`);
+                            break;
+                        }break
+                    } else {
+                        console.log(`you password is not correct`);
+                    }
+                } else {
+                    alert(`this email doesn't exist`);
+                }
+            }
+            i++
+        }
     } else if (lowerAsk == `c`) {
         let promptEmail = prompt(`enter you email`);
         for (let index = 0; index < bank.data.length; index++) {
@@ -177,8 +197,8 @@ while (true) {
             } else {
                 alert(`this email doesn't exist`);
                 ask = prompt(`welcome to js bank ( to Sing up click : a // to Log in click : b // to reset your password click : c )`)
-                lowerAsk = ask.toLowerCase() 
-                continue       
+                lowerAsk = ask.toLowerCase()
+                continue
             }
         }
         break;
